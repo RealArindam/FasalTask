@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My array pages</title>
+        <link rel="stylesheet" href="bootstrap-icons.css">
+        <link rel="stylesheet" href="bootstrap.css">
+        <style>
+            header{
+                height:90px;
+                border-bottom:10px solid rgb(26, 83, 240);
+            }
+            #txtMovies{
+                width:440px;
+            }
+            #logout{
+                background-color: rgb(185, 8, 8);
+                color:white;
+                font-size:20px;
+                padding:5px;
+                border: 2px solid rgb(185, 8, 8);
+                width:135px;
+            }
+            #movielist{
+                background-color:rgb(236, 227, 227);
+                height:1000px;
+            }
+        </style>
+        <script>
+            function logoutclick(){
+                document.write("Sucessfully logged out");
+            }
+            function moviessearch(filmtitle){
+                fetch(`http://www.omdbapi.com/?t=${filmtitle}&apikey=bc75f7a2`).
+                then(response => response.json()).
+                then(data => {
+                    var div=document.createElement("div");
+                    div.className="card m-3 p-2";
+                    div.style.width="425px";
+                    div.style.border="5px solid green";
+                    div.style.borderRadius="25px";
+                    div.innerHTML=`
+                    <img src=${data.Poster} class="card-img-top w-100" height="265px;">
+                    <div class="card-header bg-success text-light text-center">
+                        <h3>${data.Title}</h3>
+                        <h3>${data.BoxOffice}</h3>
+                        <h3>${data.Year}</h3>
+                        <h3>${data.Rated}</h3>
+                    </div>
+                    <div class="card-body text-start">
+                       Date:${data.Released}<br>
+                       Runtime:${data.Runtime}<br>
+                       Genre:${data.Genre}<br>
+                       Languages:${data.Language}<br>
+                       Director:${data.Director}<br>
+                       Writer:${data.Writer}<br>
+                       Rating:${data.imdbRating}<br>
+                       ImdbVotes:${data.imdbVotes}<br>
+                       Plot:${data.Plot}
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn btn-danger w-100" name=${data.Genre} id=${data.Title} onclick="addtolist(this)">Add to list</button>
+                    </div>   
+                    `;
+                    document.getElementById("cardshow").appendChild(div);
+                })
+            }
+            function bluroutsearch(){
+                document.getElementById("cardshow").innerHTML="";
+                var name=document.getElementById("txtMovies").value;
+
+                moviessearch(name);
+
+            }
+            function addtolist(obj){
+                var tr=document.createElement("tr");
+                var tdtext=document.createElement("td");
+                var tdgenre=document.createElement("td");
+                tdtext.innerHTML=obj.id;
+                tdtext.style.fontSize="20px";
+                tdgenre.innerHTML=obj.name;
+                tr.style.borderBottom="2px solid white";
+                tr.appendChild(tdtext);
+                tr.appendChild(tdgenre);
+                document.getElementById("tbl").appendChild(tr);
+            }
+        </script>
+    </head>
+    <body>
+        <header class="bg-dark container-fluid">    
+            <div class="d-flex justify-content-between p-3">
+                <div class="d-flex justify-content-evenly">
+                    <div><h4 class="text-danger me-3" style="font-size:28px;">MovieLibStore</h4></div>
+                <div id="inputtxt"><input type="text" placeholder="search your favourite movies" id="txtMovies" class="form-control" onblur="bluroutsearch()"></div>
+                </div>
+                <div>
+                    <button class="btn" id="logout" onclick="logoutclick()"><span class="bi bi-person-circle p-1"></span> Log out</button>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6" id="movielist">
+                    <div class="ms-4" id="cardshow">
+
+                    </div>
+                </div>
+                <div class="col-6 bg-dark text-light">
+                   <div class="d-flex w-100 p-2" style="background-color:rgb(204, 58, 82);color:white;">
+                    <h3>Playlist</h3> <span class="bi bi-play-btn ms-3 fs-4"></span>
+                   </div>
+                   <div>
+                       <table width="800">
+                           <thead>
+                               <tr>
+                                   <th style="font-size:25px;">Movie Name</th>
+                                   <th style="font-size:25px;">Genre</th>
+                               </tr>
+                           </thead>
+                           <tbody id="tbl">
+
+                           </tbody>
+                       </table>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="jquery.js"></script>
+        <script src="bootstrap.bundle.js"></script>
+    </body>    
+</html>
