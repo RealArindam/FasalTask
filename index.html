@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GetYourList</title>
+        <link rel="stylesheet" href="bootstrap-icons.css">
+        <link rel="stylesheet" href="bootstrap.css">
+        <style>
+           #frmSignIn{
+               padding:10px;
+               width:500px;
+               height:345px;
+               border:2px solid rgb(214, 207, 207);
+               border-radius:14px;
+               margin-left:500px;
+               margin-right:500px;
+               margin-top:200px;
+               margin-bottom:150px;
+               box-shadow:6px 8px 10px rgba(0,0,0,0.3);
+           } 
+           #frmSignUp{
+               padding:10px;
+               width:500px;
+               height:345px;
+               border:2px solid rgb(214, 207, 207);
+               border-radius:14px;
+               margin-left:500px;
+               margin-right:500px;
+               margin-top:130px;
+               margin-bottom:100px;
+               box-shadow:6px 8px 10px rgba(0,0,0,0.3);
+           } 
+           #btnsignin{
+              background-color: #000000;
+              color:#ffffff;
+              font-size:23px;
+              padding:10px;
+              margin-top: 50px;
+           }
+           #btnsignup{
+              background-color: #000000;
+              color:#ffffff;
+              font-size:23px;
+              padding:10px;
+              margin-top: 50px;
+           }
+        </style>
+        <script src="jquery.js"></script>
+        <script>
+            var obj2={userName:"",Password:""}
+            var obj={};
+            var userdetails=[{userName:'Arindam',Password:'ari@123'},
+                              {userName:'Smita',Password:'sm@123'}
+                             ];
+
+            function signupclick(){
+                obj2.userName=document.getElementById("txtName2").value;
+                obj2.Password=document.getElementById("txtPwd2").value;
+                userdetails.push(obj2);    
+            }
+            function loginclick(){
+                        var Name=document.getElementById("txtName").value;
+                        var Passwrd=document.getElementById("txtPwd").value;
+                obj=userdetails.find((use) => { return use.userName==Name});
+                if(Name==obj.userName && Passwrd==obj.Password){
+                   location.href="movielibraryapp.html";
+                }
+                else{
+                    document.getElementById("wrongpwd").innerHTML="enter valid username/password";
+                    document.getElementById("wrongpwd").style.fontSize="23px;"
+                    document.getElementById("wrongpwd").style.color="red";
+                }
+            }
+        </script>
+    </head>
+    <body class="container-fluid">
+        <div id="frmSignIn">
+            <h2 style="color:purple;text-align: center;">MYmovieLib Login</h2>
+           <div class="row mt-4">
+               <div class="col-3">
+                   <h4>Username</h4>
+               </div>
+               <div class="col-9">
+                   <input type="text" name="txtName" id="txtName" placeholder="enter username" class="form-control">
+               </div>
+           </div> 
+           <div class="row mt-4">
+               <div class="col-3">
+                   <h4>Password</h4>
+               </div>
+               <div class="col-9">
+                   <input type="password" name="txtPwd" id="txtPwd" placeholder="enter password" class="form-control">
+               </div>
+           </div>
+           <div>
+               <button class="w-100" id="btnsignin" onclick="loginclick()">Sign In</button>
+           </div>
+           <div class="mt-3 text-end">
+               <a href="#frmSignUp">Don't have? Create an account</a>
+           </div>
+        </div>
+        <div>
+            <div class="d-flex justify-content-evenly mt-4 mb-3">
+                <div style="width:450px;height:1px;background-color: #dbdbdb;"></div>
+                <div style="width:25px;height:26px;">
+                   <p style="font-size:24px;" class="fw-bold text-success">OR</p>
+                </div>
+                <div style="width:450px;height:1px;background-color:  #dbdbdb;"></div>
+            </div>
+        </div>
+        <div id="frmSignUp">
+            <h2 style="color:purple;text-align: center;">MYmovieLib Signup</h2>
+           <div class="row mt-4">
+               <div class="col-3">
+                   <h4>Username</h4>
+               </div>
+               <div class="col-9">
+                   <input type="text" name="txtName2" id="txtName2" placeholder="enter username" class="form-control">
+               </div>
+           </div> 
+           <div class="row mt-4">
+               <div class="col-3">
+                   <h4>Password</h4>
+               </div>
+               <div class="col-9">
+                   <input type="password" name="txtPwd2" id="txtPwd2" placeholder="enter password" class="form-control">
+               </div>
+           </div>
+           <div>
+               <button class="w-100" id="btnsignup" onclick="signupclick()">Sign Up Now</button>
+           </div>
+           <div class="mt-3 text-end">
+               <a href="#frmSignIn">Already have account? then sign in</a>
+           </div>
+        </div>
+
+        <div id="wrongpwd" class="text-center mt-2">
+
+        </div>
+
+
+        <script src="bootstrap.bundle.js"></script>
+    </body>    
+</html>
