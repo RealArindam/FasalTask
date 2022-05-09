@@ -30,7 +30,7 @@
                 document.write("Sucessfully logged out");
             }
             function moviessearch(filmtitle){
-                fetch(`http://www.omdbapi.com/?t=${filmtitle}&apikey=bc75f7a2`).
+                fetch(`https://www.omdbapi.com/?t=${filmtitle}&apikey=bc75f7a2`).
                 then(response => response.json()).
                 then(data => {
                     var div=document.createElement("div");
